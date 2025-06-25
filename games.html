@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全作品 - AKIRA - ヴァイブ・ゲームクリエイター</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムアニメーション */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .game-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+        
+        .game-card:hover {
+            border-color: rgba(74, 222, 128, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- グローバルナビゲーション -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logos/vibe-code-logo-main.png" alt="VIBE.CODE" class="h-8">
+                </a>
+                <div class="flex space-x-5">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-green-400 transition-colors">About</a>
+                    <a href="philosophy.html" class="text-gray-300 hover:text-green-400 transition-colors">Philosophy</a>
+                    <a href="services.html" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                    <a href="workspace.html" class="text-gray-300 hover:text-green-400 transition-colors">Workspace</a>
+                    <a href="press.html" class="text-gray-300 hover:text-green-400 transition-colors">Press</a>
+                    <a href="games.html" class="text-green-400 font-semibold">Games</a>
+                    <a href="index.html#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヘッダーセクション -->
+    <section class="pt-24 pb-16 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl font-bold text-white mb-4">全作品</h1>
+            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+                AIとの対話から生まれた、これまでのすべての作品をご紹介します。
+            </p>
+        </div>
+    </section>
+
+    <!-- ゲーム一覧セクション -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Echo Bloom -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/echo-bloom-screenshot.png" alt="Echo Bloom - 植物とAIが共鳴し合う不思議な世界" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Echo Bloom</h3>
+                    <p class="text-gray-400 mb-2">パズル・アドベンチャー | 2024年</p>
+                    <p class="text-gray-300 mb-4">植物とAIが共鳴し合う不思議な世界で、プレイヤーは失われた記憶の断片を集めながら、生命の循環を体験するゲーム。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Neuron Drive -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/neuron-drive-screenshot.png" alt="Neuron Drive - 脳内ネットワークを駆け抜けるハイスピードレーシング" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Neuron Drive</h3>
+                    <p class="text-gray-400 mb-2">サイバーパンク・レーシング | 2024年</p>
+                    <p class="text-gray-300 mb-4">脳内ネットワークを駆け抜けるハイスピードレーシング。思考の速度で走り、記憶の回路を切り開け。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Chrono Weavers -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/chrono-weavers-screenshot.png" alt="Chrono Weavers - 時間軸を織り交ぜながら物語を紡ぐRPG" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Chrono Weavers</h3>
+                    <p class="text-gray-400 mb-2">タイムトラベル・RPG | 2023年</p>
+                    <p class="text-gray-300 mb-4">時間軸を織り交ぜながら物語を紡ぐRPG。過去と未来を行き来し、運命の糸を編み直せ。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Quantum Maze -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/quantum-maze-screenshot.png" alt="Quantum Maze - 量子力学の原理を使って迷路を解く頭脳戦パズル" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Quantum Maze</h3>
+                    <p class="text-gray-400 mb-2">量子パズル | 2023年</p>
+                    <p class="text-gray-300 mb-4">量子力学の原理を使って迷路を解く、頭脳戦パズルゲーム。重ね合わせ状態を操り、不可能を可能にせよ。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Void Walker -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/void-walker-screenshot.png" alt="Void Walker - 虚無の世界を歩き回る謎の存在の暗黒アクション" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Void Walker</h3>
+                    <p class="text-gray-400 mb-2">アクション・プラットフォーマー | 2023年</p>
+                    <p class="text-gray-300 mb-4">虚無の世界を歩き回る謎の存在となり、失われた世界の秘密を解き明かす暗黒アクションゲーム。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Digital Dreams -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/digital-dreams-screenshot.png" alt="Digital Dreams - AIが生成する無限の夢の境界線を探索するVR体験" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Digital Dreams</h3>
+                    <p class="text-gray-400 mb-2">VR体験 | 2022年</p>
+                    <p class="text-gray-300 mb-4">仮想現実の中で展開される夢世界を体験。AIが生成する無限の夢の境界線を探索せよ。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Neon Nights -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/neon-nights-screenshot.png" alt="Neon Nights - ネオンきらめく未来都市でのAIと人間の恐愛ストーリー" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Neon Nights</h3>
+                    <p class="text-gray-400 mb-2">ビジュアルノベル | 2022年</p>
+                    <p class="text-gray-300 mb-4">ネオンきらめく未来都市を舞台に、人工知能と人間の恋愛を描くインタラクティブ・ストーリー。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Code Breaker -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/code-breaker-screenshot.png" alt="Code Breaker - サイバーセキュリティを学ぶリアルハッキング体験" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Code Breaker</h3>
+                    <p class="text-gray-400 mb-2">ハッキング・シミュレーター | 2022年</p>
+                    <p class="text-gray-300 mb-4">リアルなハッキング体験を通じて、サイバーセキュリティの世界を学ぶ教育ゲーム。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Pixel Warrior -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/pixel-warrior-screenshot.png" alt="Pixel Warrior - 8bitスタイルのレトロアクションゲーム" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Pixel Warrior</h3>
+                    <p class="text-gray-400 mb-2">レトロ・アクション | 2021年</p>
+                    <p class="text-gray-300 mb-4">8bitスタイルのレトロアクションゲーム。古き良き時代のゲームデザインを現代に蘇らせた作品。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Mind Merge -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/mind-merge-screenshot.png" alt="Mind Merge - AIと人間の意識が融合する協力パズル" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Mind Merge</h3>
+                    <p class="text-gray-400 mb-2">協力パズル | 2021年</p>
+                    <p class="text-gray-300 mb-4">2つの意識が融合し、複雑なパズルを解く協力ゲーム。AIと人間の思考プロセスの違いを体験。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Cosmic Gardener -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/cosmic-gardener-screenshot.png" alt="Cosmic Gardener - 宇宙空間で植物を育てる壮大な農業シミュレーション" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Cosmic Gardener</h3>
+                    <p class="text-gray-400 mb-2">宇宙農業シミュレーション | 2021年</p>
+                    <p class="text-gray-300 mb-4">宇宙空間で植物を育て、惑星を緑化する壮大な農業シミュレーション。生命の循環を宇宙規模で体験。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Shadow Protocol -->
+                <div class="game-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/shadow-protocol-screenshot.png" alt="Shadow Protocol - 影を操る能力で敵地に潜入するステルスアクション" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Shadow Protocol</h3>
+                    <p class="text-gray-400 mb-2">ステルス・アクション | 2020年</p>
+                    <p class="text-gray-300 mb-4">影を操る能力を持つエージェントとなり、敵地に潜入するステルスアクションゲーム。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-8 px-4 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <a href="index.html" class="text-green-400 hover:text-green-300 transition-colors font-semibold">← ホームに戻る</a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 AKIRA - ヴァイブ・ゲームクリエイター. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

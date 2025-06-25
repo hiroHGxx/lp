@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>経歴 - AKIRA - ヴァイブ・ゲームクリエイター</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムアニメーション */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            }
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+            }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .timeline-item {
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 24px;
+            width: 3px;
+            height: calc(100% + 24px);
+            background: linear-gradient(to bottom, #4ade80, #4f46e5);
+        }
+        
+        .timeline-item:last-child::before {
+            height: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: -20px;
+            top: 20px;
+            width: 16px;
+            height: 16px;
+            background: #4ade80;
+            border-radius: 50%;
+            border: 3px solid #111827;
+        }
+        
+        .skill-bar {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- グローバルナビゲーション -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logos/vibe-code-logo-main.png" alt="VIBE.CODE" class="h-8">
+                </a>
+                <div class="flex space-x-5">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors">Home</a>
+                    <a href="about.html" class="text-green-400 font-semibold">About</a>
+                    <a href="philosophy.html" class="text-gray-300 hover:text-green-400 transition-colors">Philosophy</a>
+                    <a href="services.html" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                    <a href="workspace.html" class="text-gray-300 hover:text-green-400 transition-colors">Workspace</a>
+                    <a href="press.html" class="text-gray-300 hover:text-green-400 transition-colors">Press</a>
+                    <a href="games.html" class="text-gray-300 hover:text-green-400 transition-colors">Games</a>
+                    <a href="index.html#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヘッダーセクション -->
+    <section class="pt-24 pb-16 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div class="container mx-auto">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- プロフィール画像 -->
+                <div class="flex-shrink-0">
+                    <div class="w-48 h-48 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center pulse-glow">
+                        <span class="text-green-400 text-8xl font-bold">A</span>
+                    </div>
+                </div>
+                
+                <!-- プロフィール情報 -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-5xl font-bold text-white mb-4">AKIRA</h1>
+                    <p class="text-2xl text-green-400 mb-6">ヴァイブ・ゲームクリエイター</p>
+                    <p class="text-lg text-gray-300 max-w-2xl leading-relaxed">
+                        「AIとの対話で、コードを紡ぎ、世界を創る」という信念のもと、
+                        人工知能を共同創造者として位置づける新世代のゲーム開発者。
+                        従来の開発手法にとらわれない、革新的なアプローチで数々の話題作を生み出している。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 経歴セクション -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">経歴</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative pl-8">
+                    
+                    <!-- 2024年 -->
+                    <div class="timeline-item mb-12">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <span class="text-green-400 font-bold text-lg">2024年</span>
+                                <span class="ml-4 text-gray-400">現在</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">独立ゲーム開発者として本格始動</h3>
+                            <p class="text-gray-300 mb-4">
+                                AIとのペアプログラミングを本格的に導入し、「ヴァイブコーディング」の手法を確立。
+                                Echo BloomとNeuron Driveを同時リリースし、インディーゲーム界で注目を集める。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Echo Bloom リリース</span>
+                                <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-sm">Neuron Drive リリース</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2023年 -->
+                    <div class="timeline-item mb-12">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <span class="text-green-400 font-bold text-lg">2023年</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">AIとの協働開発手法を研究</h3>
+                            <p class="text-gray-300 mb-4">
+                                Chrono WeaversとQuantum Mazeの開発を通じて、AIを活用した創作プロセスを深化。
+                                時間軸操作と量子力学をゲームメカニクスに取り入れた革新的な作品を発表。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Chrono Weavers リリース</span>
+                                <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Quantum Maze リリース</span>
+                                <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-sm">Void Walker リリース</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2022年 -->
+                    <div class="timeline-item mb-12">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <span class="text-green-400 font-bold text-lg">2022年</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">VR・インタラクティブメディアに挑戦</h3>
+                            <p class="text-gray-300 mb-4">
+                                Digital DreamsでVR開発に参入。Neon Nightsではビジュアルノベルというジャンルで、
+                                AIと人間の関係性を深く掘り下げた物語を制作。Code Breakerで教育ゲーム分野にも進出。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Digital Dreams リリース</span>
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Neon Nights リリース</span>
+                                <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Code Breaker リリース</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2021年 -->
+                    <div class="timeline-item mb-12">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <span class="text-green-400 font-bold text-lg">2021年</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">多様なジャンルへの挑戦期</h3>
+                            <p class="text-gray-300 mb-4">
+                                Pixel Warriorでレトロゲームの魅力を現代に蘇らせ、Mind Mergeで協力ゲームの新しい形を提案。
+                                Cosmic Gardenerでは壮大な宇宙農業シミュレーションを実現し、ジャンルの幅を大きく広げた。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Pixel Warrior リリース</span>
+                                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Mind Merge リリース</span>
+                                <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-sm">Cosmic Gardener リリース</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2020年 -->
+                    <div class="timeline-item mb-12">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <span class="text-green-400 font-bold text-lg">2020年</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">ゲーム開発者としてのデビュー</h3>
+                            <p class="text-gray-300 mb-4">
+                                Shadow Protocolで開発者として正式デビュー。ステルスアクションというジャンルで、
+                                影を操る独特のゲームメカニクスを実装し、インディーゲーム界で話題となる。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">Shadow Protocol リリース</span>
+                                <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-sm">開発者デビュー</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2018-2019年 -->
+                    <div class="timeline-item mb-12">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <span class="text-green-400 font-bold text-lg">2018-2019年</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">AI技術との出会い・独学期間</h3>
+                            <p class="text-gray-300 mb-4">
+                                機械学習とゲーム開発の融合に強い関心を持ち、独学でプログラミングとAI技術を習得。
+                                この時期に「AIとの対話による創作」というコンセプトの原型が生まれる。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">AI技術習得</span>
+                                <span class="px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full text-sm">プログラミング独学</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2015-2017年 -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <span class="text-green-400 font-bold text-lg">2015-2017年</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">東京工科大学 メディア学部 卒業</h3>
+                            <p class="text-gray-300 mb-4">
+                                デジタルメディアとインタラクティブコンテンツを専攻。
+                                卒業制作では「感情認識AIを活用したインタラクティブアート」を制作し、
+                                後の創作活動の基盤となる技術と思想を築く。
+                            </p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">大学卒業</span>
+                                <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm">インタラクティブアート制作</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- スキル・専門分野セクション -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">スキル・専門分野</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- テクニカルスキル -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 text-white">テクニカルスキル</h3>
+                    <div class="space-y-6">
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-green-400 font-semibold">Unity / C#</span>
+                                <span class="text-gray-400">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-green-400 font-semibold">Python / AI/ML</span>
+                                <span class="text-gray-400">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-green-400 font-semibold">JavaScript / Web技術</span>
+                                <span class="text-gray-400">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-green-400 font-semibold">Blender / 3Dモデリング</span>
+                                <span class="text-gray-400">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-green-400 to-green-500 h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 創作・デザインスキル -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 text-white">創作・デザインスキル</h3>
+                    <div class="space-y-6">
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-indigo-400 font-semibold">ゲームデザイン</span>
+                                <span class="text-gray-400">98%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-indigo-400 to-indigo-500 h-2 rounded-full" style="width: 98%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-indigo-400 font-semibold">ストーリーテリング</span>
+                                <span class="text-gray-400">92%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-indigo-400 to-indigo-500 h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-indigo-400 font-semibold">UI/UXデザイン</span>
+                                <span class="text-gray-400">88%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-indigo-400 to-indigo-500 h-2 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-bar rounded-lg p-4">
+                            <div class="flex justify-between mb-2">
+                                <span class="text-indigo-400 font-semibold">サウンドデザイン</span>
+                                <span class="text-gray-400">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-indigo-400 to-indigo-500 h-2 rounded-full" style="width: 75%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 哲学・アプローチセクション -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">開発哲学</h2>
+            
+            <div class="space-y-8">
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-8 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-4 text-green-400">ヴァイブコーディング</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        AIとの対話を通じてコードを生成し、創作を行う独自の開発手法。
+                        単純な自動化ではなく、人間の創造性とAIの処理能力を融合させることで、
+                        従来では考えられなかった斬新なアイデアとその実装を可能にする。
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-8 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-400">共創パートナーとしてのAI</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        AIを単なるツールではなく「共同創造者」として位置づけ、
+                        対話を重ねながらゲームの世界観やメカニクスを練り上げていく。
+                        この過程で生まれる予期しないアイデアこそが、真の創造性の源泉だと考えている。
+                    </p>
+                </div>
+                
+                <div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg p-8 border border-gray-700">
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400">境界の消失</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        ジャンル、技術、芸術の境界を意識的に曖昧にし、
+                        プレイヤーに新しい体験と発見を提供することを重視。
+                        既存の枠組みにとらわれない発想こそが、ゲームの未来を切り開くと信じている。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-8 px-4 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <a href="index.html" class="text-green-400 hover:text-green-300 transition-colors font-semibold">← ホームに戻る</a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 AKIRA - ヴァイブ・ゲームクリエイター. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

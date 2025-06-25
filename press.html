@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>プレスキット - AKIRA - ヴァイブ・ゲームクリエイター</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムアニメーション */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            }
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+            }
+        }
+        
+        @keyframes slide-in {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .slide-in {
+            animation: slide-in 0.5s ease-out;
+        }
+        
+        .press-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .press-card:hover {
+            border-color: rgba(74, 222, 128, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.2);
+        }
+        
+        .download-btn {
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(74, 222, 128, 0.4);
+        }
+        
+        .asset-preview {
+            background: linear-gradient(135deg, #374151 20%, #1f2937 40%, #111827 80%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .asset-preview::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 60%;
+            height: 60%;
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            border-radius: 8px;
+            opacity: 0.7;
+        }
+        
+        .media-mention {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-left: 4px solid #4ade80;
+        }
+        
+        .faq-item {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.1);
+        }
+        
+        .stat-number {
+            background: linear-gradient(90deg, #4ade80, #22c55e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- グローバルナビゲーション -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logos/vibe-code-logo-main.png" alt="VIBE.CODE" class="h-8">
+                </a>
+                <div class="flex space-x-6">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-green-400 transition-colors">About</a>
+                    <a href="philosophy.html" class="text-gray-300 hover:text-green-400 transition-colors">Philosophy</a>
+                    <a href="services.html" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                    <a href="workspace.html" class="text-gray-300 hover:text-green-400 transition-colors">Workspace</a>
+                    <a href="press.html" class="text-green-400 font-semibold">Press</a>
+                    <a href="games.html" class="text-gray-300 hover:text-green-400 transition-colors">Games</a>
+                    <a href="index.html#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="pt-24 pb-16 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div class="container mx-auto text-center">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center pulse-glow mx-auto mb-8">
+                <span class="text-green-400 text-4xl font-bold">📰</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">Press Kit</h1>
+            <p class="text-xl md:text-2xl text-green-400 mb-8">メディア関係者向け資料集</p>
+            <p class="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                AKIRAやヴァイブコーディングに関する記事執筆、取材、紹介に必要な<br>
+                すべての情報とアセットを一箇所にまとめました。
+            </p>
+        </div>
+    </section>
+
+    <!-- クイック情報 -->
+    <section class="py-16 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-12 text-green-400">基本情報</h2>
+            
+            <div class="grid md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center">
+                    <div class="text-4xl font-bold stat-number mb-2">2020</div>
+                    <p class="text-gray-400">デビュー年</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold stat-number mb-2">12+</div>
+                    <p class="text-gray-400">リリース作品数</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold stat-number mb-2">5</div>
+                    <p class="text-gray-400">受賞歴</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold stat-number mb-2">15+</div>
+                    <p class="text-gray-400">メディア露出</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プロフィール・経歴サマリー -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">AKIRA プロフィール</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- 基本プロフィール -->
+                <div class="press-card rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-white">基本情報</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between border-b border-gray-700 pb-2">
+                            <span class="text-gray-400">本名</span>
+                            <span class="text-white">AKIRA（アキラ）</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-700 pb-2">
+                            <span class="text-gray-400">職業</span>
+                            <span class="text-white">ヴァイブ・ゲームクリエイター</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-700 pb-2">
+                            <span class="text-gray-400">専門分野</span>
+                            <span class="text-white">インディーゲーム開発・AI活用</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-700 pb-2">
+                            <span class="text-gray-400">開発手法</span>
+                            <span class="text-white">ヴァイブコーディング</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-700 pb-2">
+                            <span class="text-gray-400">主な使用ツール</span>
+                            <span class="text-white">Unity, Claude AI, Blender</span>
+                        </div>
+                        <div class="flex justify-between border-b border-gray-700 pb-2">
+                            <span class="text-gray-400">活動開始</span>
+                            <span class="text-white">2020年</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-gray-400">拠点</span>
+                            <span class="text-white">日本</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 経歴ハイライト -->
+                <div class="press-card rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-white">経歴ハイライト</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-bold text-green-400 mb-2">2024年</h4>
+                            <p class="text-gray-300">「Echo Bloom」「Neuron Drive」同時リリース。ヴァイブコーディングの手法が注目を集める。</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-green-400 mb-2">2023年</h4>
+                            <p class="text-gray-300">「Chrono Weavers」で時間軸操作ゲームの新境地を開拓。インディーゲーム界で話題となる。</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-green-400 mb-2">2021年</h4>
+                            <p class="text-gray-300">多ジャンル作品の連続リリース。AI協働開発の実績を積み重ねる。</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-green-400 mb-2">2020年</h4>
+                            <p class="text-gray-300">「Shadow Protocol」でゲーム開発者デビュー。影を操る独特のメカニクスで注目される。</p>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-green-400 mb-2">2017年</h4>
+                            <p class="text-gray-300">東京工科大学メディア学部卒業。感情認識AIアート制作で基盤を築く。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品リスト -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">代表作品</h2>
+            
+            <div class="grid lg:grid-cols-3 gap-8">
+                
+                <!-- Echo Bloom -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="w-full h-32 bg-gradient-to-br from-green-400 to-green-600 rounded-lg mb-4 flex items-center justify-center">
+                        <span class="text-white text-xl font-bold">Echo Bloom</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Echo Bloom</h3>
+                    <p class="text-gray-400 mb-3">パズル・アドベンチャー | 2024年</p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        植物が記憶を持つ世界で、プレイヤーは失われた記憶の断片を集めながら生命の循環を体験。
+                        AIとの対話から生まれた感情的なゲームメカニクスが話題となった。
+                    </p>
+                    <div class="text-sm text-gray-400">
+                        <p><strong>開発期間:</strong> 6ヶ月</p>
+                        <p><strong>プラットフォーム:</strong> PC (Steam)</p>
+                        <p><strong>特徴:</strong> 感情認識システム、植物記憶メカニクス</p>
+                    </div>
+                </div>
+
+                <!-- Neuron Drive -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="w-full h-32 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center">
+                        <span class="text-white text-xl font-bold">Neuron Drive</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Neuron Drive</h3>
+                    <p class="text-gray-400 mb-3">サイバーパンク・レーシング | 2024年</p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        脳内ネットワークを駆け抜けるハイスピードレーシング。
+                        思考の速度でコースが変化する革新的なレーシングゲーム。
+                    </p>
+                    <div class="text-sm text-gray-400">
+                        <p><strong>開発期間:</strong> 8ヶ月</p>
+                        <p><strong>プラットフォーム:</strong> PC, VR対応</p>
+                        <p><strong>特徴:</strong> 思考連動レーシング、VRサポート</p>
+                    </div>
+                </div>
+
+                <!-- Chrono Weavers -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="w-full h-32 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg mb-4 flex items-center justify-center">
+                        <span class="text-white text-xl font-bold">Chrono Weavers</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Chrono Weavers</h3>
+                    <p class="text-gray-400 mb-3">タイムトラベル・RPG | 2023年</p>
+                    <p class="text-gray-300 mb-4 text-sm leading-relaxed">
+                        時間軸を織り交ぜながら物語を紡ぐRPG。
+                        過去と未来を行き来し、運命の糸を編み直す壮大な物語。
+                    </p>
+                    <div class="text-sm text-gray-400">
+                        <p><strong>開発期間:</strong> 12ヶ月</p>
+                        <p><strong>プラットフォーム:</strong> PC, Mobile</p>
+                        <p><strong>特徴:</strong> 時間軸操作、マルチエンディング</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プレス用アセット -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">プレス用アセット</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- ロゴ・ブランディング -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="asset-preview h-32 rounded-lg mb-4"></div>
+                    <h3 class="text-lg font-bold mb-3 text-white">ロゴ・ブランディング</h3>
+                    <p class="text-gray-300 mb-4 text-sm">VIBE.CODE ロゴ、AKIRAアイコン、ブランドガイドライン</p>
+                    <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm">
+                        📦 ダウンロード (2.1MB)
+                    </button>
+                </div>
+
+                <!-- プロフィール写真 -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="asset-preview h-32 rounded-lg mb-4"></div>
+                    <h3 class="text-lg font-bold mb-3 text-white">プロフィール画像</h3>
+                    <p class="text-gray-300 mb-4 text-sm">高解像度プロフィール写真、アバター画像セット</p>
+                    <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm">
+                        📦 ダウンロード (5.3MB)
+                    </button>
+                </div>
+
+                <!-- ゲームスクリーンショット -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="asset-preview h-32 rounded-lg mb-4"></div>
+                    <h3 class="text-lg font-bold mb-3 text-white">ゲーム画像</h3>
+                    <p class="text-gray-300 mb-4 text-sm">全作品のスクリーンショット、キーアート、トレーラー</p>
+                    <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm">
+                        📦 ダウンロード (45.7MB)
+                    </button>
+                </div>
+
+                <!-- ワークスペース写真 -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="asset-preview h-32 rounded-lg mb-4"></div>
+                    <h3 class="text-lg font-bold mb-3 text-white">ワークスペース</h3>
+                    <p class="text-gray-300 mb-4 text-sm">開発環境の写真、制作風景、機材セットアップ</p>
+                    <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm">
+                        📦 ダウンロード (12.4MB)
+                    </button>
+                </div>
+
+                <!-- プレスリリース -->
+                <div class="press-card rounded-lg p-6">
+                    <div class="asset-preview h-32 rounded-lg mb-4"></div>
+                    <h3 class="text-lg font-bold mb-3 text-white">プレスリリース</h3>
+                    <p class="text-gray-300 mb-4 text-sm">過去のプレスリリース、企画書テンプレート</p>
+                    <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm">
+                        📦 ダウンロード (2.8MB)
+                    </button>
+                </div>
+
+                <!-- 完全パッケージ -->
+                <div class="press-card rounded-lg p-6 border-green-500">
+                    <div class="asset-preview h-32 rounded-lg mb-4"></div>
+                    <h3 class="text-lg font-bold mb-3 text-green-400">🌟 完全パッケージ</h3>
+                    <p class="text-gray-300 mb-4 text-sm">すべてのアセットを含む完全版パッケージ</p>
+                    <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm">
+                        📦 ダウンロード (68.3MB)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ヴァイブコーディング資料 -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">ヴァイブコーディング資料</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    
+                    <!-- 技術資料 -->
+                    <div class="press-card rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-indigo-400">技術解説資料</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li>• ヴァイブコーディングの基本原理</li>
+                            <li>• AI協働開発プロセス詳細</li>
+                            <li>• 使用ツール・技術スタック</li>
+                            <li>• 開発効率化事例</li>
+                            <li>• 従来手法との比較データ</li>
+                        </ul>
+                        <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm mt-4">
+                            📄 技術資料ダウンロード
+                        </button>
+                    </div>
+
+                    <!-- インタビュー用FAQ -->
+                    <div class="press-card rounded-lg p-6">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">インタビュー用FAQ</h3>
+                        <ul class="space-y-3 text-gray-300">
+                            <li>• よくある質問と回答集</li>
+                            <li>• 取材用キーポイント</li>
+                            <li>• 専門用語解説</li>
+                            <li>• 写真・動画撮影OK範囲</li>
+                            <li>• 記事確認プロセス</li>
+                        </ul>
+                        <button class="download-btn w-full py-2 text-white rounded font-semibold text-sm mt-4">
+                            📄 FAQ資料ダウンロード
+                        </button>
+                    </div>
+                </div>
+
+                <!-- FAQ抜粋 -->
+                <div class="space-y-4">
+                    <h3 class="text-2xl font-bold mb-6 text-white">よくある質問（抜粋）</h3>
+                    
+                    <div class="faq-item rounded-lg p-4">
+                        <h4 class="font-bold text-green-400 mb-2">Q: ヴァイブコーディングとは何ですか？</h4>
+                        <p class="text-gray-300 text-sm">A: AIとの対話を通じてコードを生成し、人間の直感とAIの論理的思考を融合させる新しい開発手法です。単なる効率化ではなく、創造性の拡張を目指します。</p>
+                    </div>
+                    
+                    <div class="faq-item rounded-lg p-4">
+                        <h4 class="font-bold text-green-400 mb-2">Q: AIがゲーム開発に与える影響をどう考えていますか？</h4>
+                        <p class="text-gray-300 text-sm">A: AIは人間のクリエイティビティを代替するのではなく、増幅させるパートナーです。従来では不可能だったアイデアの実現や、新しい表現の可能性を開いてくれます。</p>
+                    </div>
+                    
+                    <div class="faq-item rounded-lg p-4">
+                        <h4 class="font-bold text-green-400 mb-2">Q: 今後の目標は？</h4>
+                        <p class="text-gray-300 text-sm">A: ヴァイブコーディングを広く普及させ、人間とAIが真のパートナーとして共創する未来を実現することです。また、この手法を活用した更なる革新的なゲーム作品を生み出したいと考えています。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- メディア露出実績 -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">メディア露出実績</h2>
+            
+            <div class="max-w-4xl mx-auto space-y-6">
+                
+                <div class="media-mention rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-bold text-white">Game Developers Magazine</h3>
+                        <span class="text-gray-400 text-sm">2024年3月</span>
+                    </div>
+                    <p class="text-gray-300 mb-2">"AIとの共創で革新を続ける新世代クリエイター"</p>
+                    <p class="text-gray-400 text-sm">ヴァイブコーディング手法の詳細解説と、Echo Bloom開発秘話を特集。6ページのカバーストーリー。</p>
+                </div>
+
+                <div class="media-mention rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-bold text-white">TechCrunch Japan</h3>
+                        <span class="text-gray-400 text-sm">2024年1月</span>
+                    </div>
+                    <p class="text-gray-300 mb-2">"ゲーム開発におけるAI活用の最前線"</p>
+                    <p class="text-gray-400 text-sm">AI協働開発の事例として紹介。開発効率の向上データも掲載された。</p>
+                </div>
+
+                <div class="media-mention rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-bold text-white">IGN Japan</h3>
+                        <span class="text-gray-400 text-sm">2023年11月</span>
+                    </div>
+                    <p class="text-gray-300 mb-2">"Chrono Weavers レビュー：時間を操る新感覚RPG"</p>
+                    <p class="text-gray-400 text-sm">★★★★☆の高評価。「革新的なゲームメカニクス」として評価された。</p>
+                </div>
+
+                <div class="media-mention rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-bold text-white">ASCII.jp</h3>
+                        <span class="text-gray-400 text-sm">2023年8月</span>
+                    </div>
+                    <p class="text-gray-300 mb-2">"インディーゲームクリエイターインタビュー"</p>
+                    <p class="text-gray-400 text-sm">創作活動の原点から現在までの軌跡を詳細にインタビュー。</p>
+                </div>
+
+                <div class="media-mention rounded-lg p-6">
+                    <div class="flex justify-between items-start mb-3">
+                        <h3 class="text-lg font-bold text-white">CEDEC 2023</h3>
+                        <span class="text-gray-400 text-sm">2023年8月</span>
+                    </div>
+                    <p class="text-gray-300 mb-2">"AIとの協働による創造的ゲーム開発" 講演</p>
+                    <p class="text-gray-400 text-sm">300名以上が参加。講演後の質疑応答は30分延長された。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 取材依頼・連絡先 -->
+    <section class="py-20 px-4 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">取材・お問い合わせ</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- 取材依頼について -->
+                <div class="press-card rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-white">取材について</h3>
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <h4 class="font-bold text-green-400 mb-2">対応可能な取材形式</h4>
+                            <ul class="text-gray-300 text-sm space-y-1">
+                                <li>• オンラインインタビュー（Zoom等）</li>
+                                <li>• 書面インタビュー</li>
+                                <li>• ワークスペース見学・撮影</li>
+                                <li>• カンファレンス講演</li>
+                                <li>• ゲーム開発実演・解説</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-green-400 mb-2">対応時間</h4>
+                            <p class="text-gray-300 text-sm">平日 10:00-18:00（JST）<br>土日・祝日も要相談で対応可能</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-green-400 mb-2">回答期間</h4>
+                            <p class="text-gray-300 text-sm">お問い合わせから24時間以内に初回回答<br>詳細調整は3営業日以内</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 連絡先情報 -->
+                <div class="press-card rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-white">連絡先</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-bold text-indigo-400 mb-2">プレス専用</h4>
+                            <p class="text-gray-300">press@vibe-code.dev</p>
+                            <p class="text-gray-400 text-sm">取材・メディア関連のお問い合わせ</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-indigo-400 mb-2">一般お問い合わせ</h4>
+                            <p class="text-gray-300">hello@vibe-code.dev</p>
+                            <p class="text-gray-400 text-sm">その他のご質問・ご相談</p>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-indigo-400 mb-2">SNS</h4>
+                            <div class="space-y-1">
+                                <p class="text-gray-300">Twitter: @AKIRA_vibes</p>
+                                <p class="text-gray-300">Instagram: @akira.gamedev</p>
+                                <p class="text-gray-300">LinkedIn: AKIRA - Game Creator</p>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="font-bold text-indigo-400 mb-2">注意事項</h4>
+                            <p class="text-gray-400 text-sm">記事掲載前の事実確認にご協力ください。<br>画像使用時は適切なクレジット表記をお願いします。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="index.html#contact" class="px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold text-lg">
+                    取材依頼フォームへ
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-8 px-4 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto text-center">
+            <div class="mb-4 space-x-6">
+                <a href="index.html" class="text-green-400 hover:text-green-300 transition-colors font-semibold">← ホームに戻る</a>
+                <span class="text-gray-500">|</span>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">完全メディアキット (PDF)</a>
+                <span class="text-gray-500">|</span>
+                <a href="#" class="text-gray-400 hover:text-white transition-colors">アセット利用規約</a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 AKIRA - ヴァイブ・ゲームクリエイター. All rights reserved.</p>
+            <p class="text-gray-500 text-sm mt-2">このプレスキットの内容は報道・紹介目的での使用が許可されています。</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ワークスペース - AKIRA - ヴァイブ・ゲームクリエイター</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムアニメーション */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            }
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .rotate-slow {
+            animation: rotate 20s linear infinite;
+        }
+        
+        .gear-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .gear-card:hover {
+            border-color: rgba(74, 222, 128, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .workspace-image {
+            background: linear-gradient(135deg, #374151 20%, #1f2937 40%, #111827 80%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .workspace-image::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 60%;
+            height: 30%;
+            background: linear-gradient(45deg, #4ade80, #22c55e);
+            border-radius: 8px;
+            opacity: 0.8;
+        }
+        
+        .workspace-image::after {
+            content: '💻';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            opacity: 0.9;
+        }
+        
+        .tool-category {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border-left: 4px solid;
+        }
+        
+        .tool-category.development {
+            border-left-color: #4ade80;
+        }
+        
+        .tool-category.design {
+            border-left-color: #4f46e5;
+        }
+        
+        .tool-category.ai {
+            border-left-color: #7c3aed;
+        }
+        
+        .tool-category.productivity {
+            border-left-color: #f59e0b;
+        }
+        
+        .spec-item {
+            background: linear-gradient(90deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.1);
+        }
+        
+        .workflow-step {
+            position: relative;
+        }
+        
+        .workflow-arrow {
+            position: absolute;
+            right: -12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #4ade80;
+            font-size: 1.5rem;
+        }
+        
+        .workflow-step:last-child .workflow-arrow {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- グローバルナビゲーション -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logos/vibe-code-logo-main.png" alt="VIBE.CODE" class="h-8">
+                </a>
+                <div class="flex space-x-5">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-green-400 transition-colors">About</a>
+                    <a href="philosophy.html" class="text-gray-300 hover:text-green-400 transition-colors">Philosophy</a>
+                    <a href="services.html" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                    <a href="workspace.html" class="text-green-400 font-semibold">Workspace</a>
+                    <a href="press.html" class="text-gray-300 hover:text-green-400 transition-colors">Press</a>
+                    <a href="games.html" class="text-gray-300 hover:text-green-400 transition-colors">Games</a>
+                    <a href="index.html#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="pt-24 pb-16 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div class="container mx-auto text-center">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center pulse-glow mx-auto mb-8">
+                <span class="text-green-400 text-4xl font-bold rotate-slow">⚙️</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">My Workspace</h1>
+            <p class="text-xl md:text-2xl text-green-400 mb-8">創造の魔法が生まれる場所</p>
+            <p class="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                ヴァイブコーディングを実現するための、厳選されたツールと環境をご紹介。<br>
+                AIとの対話から生まれる創造性を最大化するためのセットアップです。
+            </p>
+        </div>
+    </section>
+
+    <!-- ワークスペース概要 -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">創造空間のコンセプト</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="h-80 rounded-lg overflow-hidden">
+                    <img src="assets/images/workspace/akira-workspace-main.png" alt="AKIRAの創造空間 - ヴァイブコーディング環境" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                </div>
+                <div>
+                    <h3 class="text-3xl font-bold mb-6 text-white">「思考と技術の融合空間」</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        私のワークスペースは、単なる作業場ではありません。
+                        人間の直感とAIの論理的思考が自然に交わり、
+                        新しいアイデアが生まれる「創造の実験室」です。
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <span class="text-green-400 text-xl mr-3">🌿</span>
+                            <span class="text-gray-300">自然光を活かした明るい環境</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 text-xl mr-3">🎵</span>
+                            <span class="text-gray-300">集中を促すアンビエント音響</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 text-xl mr-3">⚡</span>
+                            <span class="text-gray-300">高速なAI対話応答環境</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-green-400 text-xl mr-3">🧘</span>
+                            <span class="text-gray-300">思考を整理するメディテーション空間</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ハードウェア構成 -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">Hardware Setup</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- メインPC -->
+                <div class="gear-card rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-6 float-animation">
+                        <span class="text-gray-900 text-2xl">🖥️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-green-400 text-center">メインPC</h3>
+                    <div class="space-y-3">
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">CPU</span>
+                            <p class="text-white font-semibold">AMD Ryzen 9 7950X</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">GPU</span>
+                            <p class="text-white font-semibold">NVIDIA RTX 4090</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">RAM</span>
+                            <p class="text-white font-semibold">64GB DDR5-5600</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">Storage</span>
+                            <p class="text-white font-semibold">2TB NVMe SSD</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ディスプレイ -->
+                <div class="gear-card rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-indigo-500 flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 0.5s">
+                        <span class="text-white text-2xl">📺</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-indigo-400 text-center">ディスプレイ</h3>
+                    <div class="space-y-3">
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">メイン</span>
+                            <p class="text-white font-semibold">32" 4K OLED 144Hz</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">サブ</span>
+                            <p class="text-white font-semibold">27" 2K IPS 縦置き</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">タブレット</span>
+                            <p class="text-white font-semibold">iPad Pro 12.9"</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">用途</span>
+                            <p class="text-white font-semibold">マルチタスク環境</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 入力デバイス -->
+                <div class="gear-card rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 1s">
+                        <span class="text-white text-2xl">⌨️</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-purple-400 text-center">入力デバイス</h3>
+                    <div class="space-y-3">
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">キーボード</span>
+                            <p class="text-white font-semibold">HHKB Professional</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">マウス</span>
+                            <p class="text-white font-semibold">Logitech MX Master 3S</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">ペンタブ</span>
+                            <p class="text-white font-semibold">Wacom Intuos Pro</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">音声入力</span>
+                            <p class="text-white font-semibold">Blue Yeti マイク</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VR/AR -->
+                <div class="gear-card rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-pink-500 flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 1.5s">
+                        <span class="text-white text-2xl">🥽</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-pink-400 text-center">VR/AR機器</h3>
+                    <div class="space-y-3">
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">VRヘッドセット</span>
+                            <p class="text-white font-semibold">Meta Quest Pro</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">ハンドトラッキング</span>
+                            <p class="text-white font-semibold">Ultraleap 対応</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">用途</span>
+                            <p class="text-white font-semibold">3D プロトタイピング</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">開発</span>
+                            <p class="text-white font-semibold">VR ゲーム制作</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- オーディオ -->
+                <div class="gear-card rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-yellow-500 flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 2s">
+                        <span class="text-gray-900 text-2xl">🎧</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-yellow-400 text-center">オーディオ</h3>
+                    <div class="space-y-3">
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">ヘッドフォン</span>
+                            <p class="text-white font-semibold">Sony WH-1000XM5</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">スピーカー</span>
+                            <p class="text-white font-semibold">Yamaha HS7</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">オーディオIF</span>
+                            <p class="text-white font-semibold">Focusrite Scarlett</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">環境</span>
+                            <p class="text-white font-semibold">空間オーディオ対応</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ネットワーク -->
+                <div class="gear-card rounded-lg p-6">
+                    <div class="w-16 h-16 rounded-full bg-cyan-500 flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 2.5s">
+                        <span class="text-gray-900 text-2xl">🌐</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4 text-cyan-400 text-center">ネットワーク</h3>
+                    <div class="space-y-3">
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">回線</span>
+                            <p class="text-white font-semibold">光回線 1Gbps</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">ルーター</span>
+                            <p class="text-white font-semibold">Wi-Fi 6E 対応</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">AI API</span>
+                            <p class="text-white font-semibold">低レイテンシ接続</p>
+                        </div>
+                        <div class="spec-item rounded p-3">
+                            <span class="text-gray-400 text-sm">クラウド</span>
+                            <p class="text-white font-semibold">リアルタイム同期</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ソフトウェア・ツール -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">Software & Tools</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                
+                <!-- 開発ツール -->
+                <div class="tool-category development rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-green-400">🛠️ 開発ツール</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Unity 2023.3 LTS</span>
+                            <span class="text-green-400 text-sm">ゲーム開発</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Visual Studio Code</span>
+                            <span class="text-green-400 text-sm">コードエディタ</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Git + GitHub</span>
+                            <span class="text-green-400 text-sm">バージョン管理</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Docker</span>
+                            <span class="text-green-400 text-sm">環境構築</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Postman</span>
+                            <span class="text-green-400 text-sm">API テスト</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- デザインツール -->
+                <div class="tool-category design rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-indigo-400">🎨 デザインツール</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Blender 4.0</span>
+                            <span class="text-indigo-400 text-sm">3D モデリング</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Figma</span>
+                            <span class="text-indigo-400 text-sm">UI/UX デザイン</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Adobe Creative Suite</span>
+                            <span class="text-indigo-400 text-sm">画像・動画編集</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Substance Designer</span>
+                            <span class="text-indigo-400 text-sm">テクスチャ制作</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Aseprite</span>
+                            <span class="text-indigo-400 text-sm">ピクセルアート</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AIツール -->
+                <div class="tool-category ai rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-purple-400">🤖 AIツール</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Claude (Anthropic)</span>
+                            <span class="text-purple-400 text-sm">対話・コーディング</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">GitHub Copilot</span>
+                            <span class="text-purple-400 text-sm">コード補完</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Stable Diffusion</span>
+                            <span class="text-purple-400 text-sm">画像生成</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Whisper</span>
+                            <span class="text-purple-400 text-sm">音声認識</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Custom GPT Models</span>
+                            <span class="text-purple-400 text-sm">専用 AI パートナー</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 生産性ツール -->
+                <div class="tool-category productivity rounded-lg p-6">
+                    <h3 class="text-2xl font-bold mb-6 text-yellow-400">⚡ 生産性ツール</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Notion</span>
+                            <span class="text-yellow-400 text-sm">プロジェクト管理</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Obsidian</span>
+                            <span class="text-yellow-400 text-sm">ナレッジ管理</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Raycast</span>
+                            <span class="text-yellow-400 text-sm">ランチャー</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">1Password</span>
+                            <span class="text-yellow-400 text-sm">パスワード管理</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-white font-semibold">Spotify</span>
+                            <span class="text-yellow-400 text-sm">集中音楽</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ヴァイブコーディング環境 -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">ヴァイブコーディング専用セットアップ</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="gear-card rounded-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold mb-6 text-indigo-400 text-center">AI対話最適化環境</h3>
+                    <p class="text-gray-300 mb-8 text-center leading-relaxed">
+                        AIとのリアルタイム対話を最大限活用するため、特別に構築された開発環境。
+                        思考の流れを止めることなく、アイデアを即座に形にできます。
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-bold mb-4 text-green-400">🎯 専用設定</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li>• マルチディスプレイでAI対話常時表示</li>
+                                <li>• 音声入力による高速コミュニケーション</li>
+                                <li>• リアルタイムコード共有システム</li>
+                                <li>• 思考マップ自動生成ツール</li>
+                                <li>• コンテキスト保持型AI セッション</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold mb-4 text-purple-400">⚡ 高速化技術</h4>
+                            <ul class="space-y-3 text-gray-300">
+                                <li>• API レスポンス < 200ms</li>
+                                <li>• ローカルLLM併用でオフライン対応</li>
+                                <li>• 予測的コード生成キャッシュ</li>
+                                <li>• 感情認識による対話調整</li>
+                                <li>• 作業ログ自動記録・分析</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ワークフロー -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">1日のワークフロー</h2>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="grid md:grid-cols-4 gap-6">
+                    
+                    <!-- 朝の準備 -->
+                    <div class="workflow-step gear-card rounded-lg p-6 text-center">
+                        <div class="workflow-arrow">→</div>
+                        <div class="w-16 h-16 rounded-full bg-yellow-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-gray-900 text-2xl">🌅</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-yellow-400">09:00 - 朝の準備</h3>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• システム起動</li>
+                            <li>• AI パートナー接続</li>
+                            <li>• 今日の目標設定</li>
+                            <li>• インスピレーション収集</li>
+                        </ul>
+                    </div>
+
+                    <!-- 集中作業 -->
+                    <div class="workflow-step gear-card rounded-lg p-6 text-center">
+                        <div class="workflow-arrow">→</div>
+                        <div class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-gray-900 text-2xl">💻</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-green-400">10:00 - 集中作業</h3>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• ヴァイブコーディング</li>
+                            <li>• AI との対話創作</li>
+                            <li>• プロトタイプ制作</li>
+                            <li>• アイデア実装</li>
+                        </ul>
+                    </div>
+
+                    <!-- 検証・調整 -->
+                    <div class="workflow-step gear-card rounded-lg p-6 text-center">
+                        <div class="workflow-arrow">→</div>
+                        <div class="w-16 h-16 rounded-full bg-indigo-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">🔍</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-indigo-400">14:00 - 検証・調整</h3>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• テストプレイ</li>
+                            <li>• フィードバック分析</li>
+                            <li>• AI と改善議論</li>
+                            <li>• 次期機能検討</li>
+                        </ul>
+                    </div>
+
+                    <!-- 振り返り -->
+                    <div class="workflow-step gear-card rounded-lg p-6 text-center">
+                        <div class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl">📝</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3 text-purple-400">17:00 - 振り返り</h3>
+                        <ul class="text-sm text-gray-300 space-y-1">
+                            <li>• 成果物レビュー</li>
+                            <li>• 学習ログ記録</li>
+                            <li>• 翌日計画策定</li>
+                            <li>• 創造性評価</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- おすすめセットアップ -->
+    <section class="py-20 px-4 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">クリエイター向け推奨セットアップ</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- エントリー -->
+                <div class="gear-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-green-400 text-center">エントリー</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-3xl font-bold text-white">¥200K</span>
+                        <span class="text-gray-400 block text-sm">初心者向け</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>• Ryzen 5 / RTX 4060</li>
+                        <li>• 16GB RAM</li>
+                        <li>• 27" FHD モニター</li>
+                        <li>• 基本的なAI ツール</li>
+                        <li>• Unity Personal</li>
+                    </ul>
+                </div>
+
+                <!-- プロ -->
+                <div class="gear-card rounded-lg p-6 border-green-500">
+                    <h3 class="text-xl font-bold mb-4 text-green-400 text-center">プロ 🌟</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-3xl font-bold text-white">¥500K</span>
+                        <span class="text-gray-400 block text-sm">推奨構成</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>• Ryzen 7 / RTX 4070 Ti</li>
+                        <li>• 32GB RAM</li>
+                        <li>• デュアル 4K モニター</li>
+                        <li>• AI API サブスクリプション</li>
+                        <li>• Unity Pro + アセット</li>
+                    </ul>
+                </div>
+
+                <!-- マスター -->
+                <div class="gear-card rounded-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-purple-400 text-center">マスター</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-3xl font-bold text-white">¥1M+</span>
+                        <span class="text-gray-400 block text-sm">プロレベル</span>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li>• Ryzen 9 / RTX 4090</li>
+                        <li>• 64GB RAM</li>
+                        <li>• トリプル 4K + VR</li>
+                        <li>• 専用 AI サーバー</li>
+                        <li>• フル制作環境</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12">
+                <p class="text-gray-300 mb-6">
+                    ツール選びに迷ったら、お気軽にご相談ください。<br>
+                    あなたの制作スタイルに最適な環境をアドバイスします。
+                </p>
+                <a href="index.html#contact" class="px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold">
+                    セットアップ相談する
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-8 px-4 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <a href="index.html" class="text-green-400 hover:text-green-300 transition-colors font-semibold">← ホームに戻る</a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 AKIRA - ヴァイブ・ゲームクリエイター. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

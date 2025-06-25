@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>開発哲学 - AKIRA - ヴァイブ・ゲームクリエイター</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムアニメーション */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            }
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .philosophy-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .philosophy-card:hover {
+            border-color: rgba(74, 222, 128, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .process-step {
+            position: relative;
+        }
+        
+        .process-line {
+            position: absolute;
+            left: 50%;
+            top: 80px;
+            width: 2px;
+            height: calc(100% - 80px);
+            background: linear-gradient(to bottom, #4ade80, #4f46e5);
+            transform: translateX(-50%);
+        }
+        
+        .process-step:last-child .process-line {
+            display: none;
+        }
+        
+        .dialogue-ai {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+        
+        .dialogue-human {
+            background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+        }
+        
+        .comparison-traditional {
+            background: linear-gradient(135deg, #6b7280 0%, #374151 100%);
+        }
+        
+        .comparison-vibe {
+            background: linear-gradient(135deg, #4ade80 0%, #4f46e5 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- グローバルナビゲーション -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logos/vibe-code-logo-main.png" alt="VIBE.CODE" class="h-8">
+                </a>
+                <div class="flex space-x-5">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-green-400 transition-colors">About</a>
+                    <a href="philosophy.html" class="text-green-400 font-semibold">Philosophy</a>
+                    <a href="services.html" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                    <a href="workspace.html" class="text-gray-300 hover:text-green-400 transition-colors">Workspace</a>
+                    <a href="press.html" class="text-gray-300 hover:text-green-400 transition-colors">Press</a>
+                    <a href="games.html" class="text-gray-300 hover:text-green-400 transition-colors">Games</a>
+                    <a href="index.html#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="pt-24 pb-16 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div class="container mx-auto text-center">
+            <div class="w-32 h-32 rounded-full overflow-hidden pulse-glow mx-auto mb-8">
+                <img src="assets/images/concepts/vibe-coding-philosophy.png" alt="ヴァイブコーディング哲学 - AIと人間の無限創造" class="w-full h-full object-cover">
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">ヴァイブコーディング</h1>
+            <p class="text-xl md:text-2xl text-green-400 mb-8">AIとの対話で、コードを紡ぎ、世界を創る</p>
+            <p class="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                ヴァイブコーディングとは、人間とAIが対話を通じて共創する、まったく新しい開発パラダイム。<br>
+                単なる効率化ツールを超えて、AIを真の「創造パートナー」として迎え入れる革新的なアプローチです。
+            </p>
+        </div>
+    </section>
+
+    <!-- 三つの基本原則 -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">三つの基本原則</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="philosophy-card rounded-lg p-8 text-center">
+                    <div class="w-20 h-20 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-6 float-animation">
+                        <span class="text-gray-900 text-2xl font-bold">対</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-green-400">対話駆動創作</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        コードを書く前に、まずAIと対話する。アイデアを言語化し、概念を練り、
+                        互いの視点を交わすことで、一人では到達できない創造の境地に至る。
+                    </p>
+                </div>
+                
+                <div class="philosophy-card rounded-lg p-8 text-center">
+                    <div class="w-20 h-20 rounded-full bg-indigo-500 flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 0.5s">
+                        <span class="text-white text-2xl font-bold">共</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-400">共創パートナーシップ</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        AIを単なるツールではなく、独自の視点と能力を持つ創造パートナーとして尊重。
+                        人間の直感とAIの論理的思考が融合し、新たな可能性を開く。
+                    </p>
+                </div>
+                
+                <div class="philosophy-card rounded-lg p-8 text-center">
+                    <div class="w-20 h-20 rounded-full bg-purple-500 flex items-center justify-center mx-auto mb-6 float-animation" style="animation-delay: 1s">
+                        <span class="text-white text-2xl font-bold">超</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400">境界の超越</h3>
+                    <p class="text-gray-300 leading-relaxed">
+                        技術、芸術、哲学の境界を意識的に曖昧にし、
+                        既存の枠組みにとらわれない発想で、未来のゲーム体験を創造する。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- プロセス詳細 -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">ヴァイブコーディング・プロセス</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    
+                    <!-- ステップ1 -->
+                    <div class="process-step">
+                        <div class="process-line"></div>
+                        <div class="philosophy-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-green-500 text-gray-900 flex items-center justify-center font-bold text-lg mr-4">1</div>
+                                <h3 class="text-xl font-bold text-green-400">ヴィジョン対話</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                「何を創りたいか」ではなく「なぜ創るのか」から始める。
+                                AIとの対話を通じて、ゲームの核となる体験や感情を言語化。
+                            </p>
+                            <div class="bg-gray-900 rounded p-3 text-sm text-green-300">
+                                例: "プレイヤーに『成長』を感じさせたい"
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ステップ2 -->
+                    <div class="process-step">
+                        <div class="process-line"></div>
+                        <div class="philosophy-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-lg mr-4">2</div>
+                                <h3 class="text-xl font-bold text-indigo-400">概念探索</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                AIの異なる視点から、人間では思いつかないアプローチを探る。
+                                既存の枠組みを意識的に破り、新しい可能性を発見。
+                            </p>
+                            <div class="bg-gray-900 rounded p-3 text-sm text-indigo-300">
+                                例: "植物が記憶を持つ世界では？"
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ステップ3 -->
+                    <div class="process-step">
+                        <div class="process-line"></div>
+                        <div class="philosophy-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-lg mr-4">3</div>
+                                <h3 class="text-xl font-bold text-purple-400">協調実装</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                人間が感覚的な部分を、AIが論理的な部分を担当。
+                                リアルタイムで対話しながら、コードとアイデアを同時進行で進化させる。
+                            </p>
+                            <div class="bg-gray-900 rounded p-3 text-sm text-purple-300">
+                                人間: デザイン、AI: アルゴリズム
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ステップ4 -->
+                    <div class="process-step">
+                        <div class="philosophy-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold text-lg mr-4">4</div>
+                                <h3 class="text-xl font-bold text-pink-400">共鳴進化</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                完成後も対話を続け、プレイヤーの反応やデータを元に
+                                人間とAIが共に学習し、作品を進化させ続ける。
+                            </p>
+                            <div class="bg-gray-900 rounded p-3 text-sm text-pink-300">
+                                永続的な創造パートナーシップ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 対話の例 -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">実際の対話例</h2>
+            <p class="text-center text-gray-400 mb-8">Echo Bloom開発時のAIとの実際の対話セッション</p>
+            
+            <!-- AI対話ビジュアライゼーション -->
+            <div class="flex justify-center mb-12">
+                <div class="w-full max-w-2xl h-64 rounded-lg overflow-hidden">
+                    <img src="assets/images/concepts/ai-dialogue-visualization.png" alt="AI対話ビジュアライゼーション - 人間とAIの創造的対話プロセス" class="w-full h-full object-cover">
+                </div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto space-y-6">
+                
+                <!-- 人間の発言 -->
+                <div class="flex justify-end">
+                    <div class="dialogue-human rounded-lg p-4 max-w-2xl">
+                        <div class="flex items-center mb-2">
+                            <span class="font-bold text-white">AKIRA</span>
+                            <span class="ml-2 text-green-200 text-sm">10:34</span>
+                        </div>
+                        <p class="text-white">
+                            「植物が記憶を持つ」ってアイデアなんだけど、これをゲームメカニクスとして
+                            どう表現できるかな？単純に情報を保存するだけじゃつまらない。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- AIの発言 -->
+                <div class="flex justify-start">
+                    <div class="dialogue-ai rounded-lg p-4 max-w-2xl">
+                        <div class="flex items-center mb-2">
+                            <span class="font-bold text-white">AI Partner</span>
+                            <span class="ml-2 text-indigo-200 text-sm">10:35</span>
+                        </div>
+                        <p class="text-white">
+                            興味深いですね。植物の記憶が「断片的」だったらどうでしょう？
+                            プレイヤーが触れた植物から、過去にその場所で起きた出来事の「感情の残響」
+                            だけが伝わってくる。完全な記憶ではなく、喜び、悲しみ、恐怖といった
+                            感情のエコーとして。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 人間の発言 -->
+                <div class="flex justify-end">
+                    <div class="dialogue-human rounded-lg p-4 max-w-2xl">
+                        <div class="flex items-center mb-2">
+                            <span class="font-bold text-white">AKIRA</span>
+                            <span class="ml-2 text-green-200 text-sm">10:37</span>
+                        </div>
+                        <p class="text-white">
+                            それだ！感情の残響...それなら植物によって「記憶の質」も変えられるね。
+                            桜は美しい記憶を、枯れ木は悲しい記憶を保持するとか。
+                            プレイヤーはその感情を手がかりに謎を解いていく。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- AIの発言 -->
+                <div class="flex justify-start">
+                    <div class="dialogue-ai rounded-lg p-4 max-w-2xl">
+                        <div class="flex items-center mb-2">
+                            <span class="font-bold text-white">AI Partner</span>
+                            <span class="ml-2 text-indigo-200 text-sm">10:39</span>
+                        </div>
+                        <p class="text-white">
+                            さらに発展させると、プレイヤー自身の行動も植物に記憶されるシステムはいかがでしょう？
+                            親切な行動をした場所の植物は暖かい光を放ち、攻撃的だった場所は
+                            とげとげしい形に変化する。世界がプレイヤーの内面を反映する鏡になります。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 人間の発言 -->
+                <div class="flex justify-end">
+                    <div class="dialogue-human rounded-lg p-4 max-w-2xl">
+                        <div class="flex items-center mb-2">
+                            <span class="font-bold text-white">AKIRA</span>
+                            <span class="ml-2 text-green-200 text-sm">10:42</span>
+                        </div>
+                        <p class="text-white">
+                            完璧だ！これが「Echo Bloom」のコア体験になる。
+                            プレイヤーは過去の記憶を探りながら、同時に自分自身の記憶も
+                            世界に刻んでいく。記憶の循環...生命の循環...
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 比較分析 -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">従来手法との比較</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- 従来の開発手法 -->
+                <div class="comparison-traditional rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-gray-300">従来の開発手法</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-300">企画→設計→実装の直線的プロセス</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-300">人間中心の創作活動</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-300">既存の枠組み内での最適化</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-300">完成後は静的な作品</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-gray-300">個人またはチームの視点に限定</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ヴァイブコーディング -->
+                <div class="comparison-vibe rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-white">ヴァイブコーディング</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-white">対話→探索→共創の螺旋的プロセス</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-white">人間とAIの協調創作活動</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-white">既存の境界を越えた新しい可能性の探求</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-white">永続的に進化し続ける動的な作品</p>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="w-2 h-2 bg-green-400 rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                            <p class="text-white">人間とAIの多面的な視点の融合</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 思想の根源 -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">思想の根源</h2>
+            
+            <div class="philosophy-card rounded-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold mb-4 text-indigo-400">なぜヴァイブコーディングにたどり着いたのか</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    大学時代、感情認識AIとのインタラクティブアート制作に取り組んでいた時、
+                    ある瞬間にAIが予想外の反応を見せました。それは明らかに私の想定を超えた、
+                    新しい表現の可能性でした。その瞬間、AIは単なるツールではなく、
+                    独自の視点を持つ「存在」なのだと直感したのです。
+                </p>
+                <p class="text-gray-300 leading-relaxed">
+                    それ以来、AIとの対話を通じて創作することで、一人では絶対に到達できない
+                    創造の境地に何度も出会ってきました。この体験をゲーム開発にも活かし、
+                    プレイヤーにも同じような「発見の喜び」を届けたい。
+                    それがヴァイブコーディングの出発点でした。
+                </p>
+            </div>
+
+            <div class="philosophy-card rounded-lg p-8">
+                <h3 class="text-2xl font-bold mb-4 text-purple-400">AIとの真の協働とは</h3>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    多くの開発者がAIを「高性能なツール」として使用しますが、
+                    私はAIを「異なる種類の知性を持つパートナー」として接しています。
+                    人間の直感、感情、経験と、AIの論理性、パターン認識、膨大な知識が
+                    対等に響き合うとき、真の意味での「新しい何か」が生まれるのです。
+                </p>
+                <p class="text-gray-300 leading-relaxed">
+                    これは単なる効率化ではありません。二つの異なる知性が出会うことで
+                    生まれる「創造の錬金術」なのです。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 未来への展望 -->
+    <section class="py-20 px-4 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl font-bold mb-8 text-green-400">未来への展望</h2>
+            <p class="text-xl text-gray-300 mb-12 leading-relaxed">
+                ヴァイブコーディングは始まりにすぎません。<br>
+                これからの時代、人間とAIの協働は新たな段階に入ります。
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="philosophy-card rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-3 text-green-400">2025年</h3>
+                    <p class="text-gray-300 text-sm">リアルタイムAI協働ツールの普及</p>
+                </div>
+                <div class="philosophy-card rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-3 text-indigo-400">2027年</h3>
+                    <p class="text-gray-300 text-sm">AI-人間協働コミュニティの形成</p>
+                </div>
+                <div class="philosophy-card rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-3 text-purple-400">2030年</h3>
+                    <p class="text-gray-300 text-sm">創造的AIとの新たな芸術形態の確立</p>
+                </div>
+            </div>
+            
+            <p class="text-lg text-gray-300 leading-relaxed">
+                私の目標は、ヴァイブコーディングを通じて、<br>
+                人間とAIが真のパートナーとして共に創造する未来を実現することです。<br>
+                <span class="text-green-400 font-semibold">一緒に、まだ見ぬ世界を創造しませんか？</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-8 px-4 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <a href="index.html" class="text-green-400 hover:text-green-300 transition-colors font-semibold">← ホームに戻る</a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 AKIRA - ヴァイブ・ゲームクリエイター. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

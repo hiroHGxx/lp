@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サービス - AKIRA - ヴァイブ・ゲームクリエイター</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムアニメーション */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            }
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .service-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            border-color: rgba(74, 222, 128, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .process-step {
+            position: relative;
+        }
+        
+        .process-line {
+            position: absolute;
+            left: 50%;
+            top: 100px;
+            width: 2px;
+            height: calc(100% - 100px);
+            background: linear-gradient(to bottom, #4ade80, #4f46e5);
+            transform: translateX(-50%);
+        }
+        
+        .process-step:last-child .process-line {
+            display: none;
+        }
+        
+        .price-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .price-card:hover {
+            border-color: rgba(74, 222, 128, 0.8);
+            transform: translateY(-4px);
+        }
+        
+        .price-featured {
+            border-color: rgba(79, 70, 229, 0.5);
+            position: relative;
+        }
+        
+        .price-featured::before {
+            content: '推奨';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- グローバルナビゲーション -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center">
+                    <img src="assets/images/logos/vibe-code-logo-main.png" alt="VIBE.CODE" class="h-8">
+                </a>
+                <div class="flex space-x-5">
+                    <a href="index.html" class="text-gray-300 hover:text-green-400 transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-green-400 transition-colors">About</a>
+                    <a href="philosophy.html" class="text-gray-300 hover:text-green-400 transition-colors">Philosophy</a>
+                    <a href="services.html" class="text-green-400 font-semibold">Services</a>
+                    <a href="workspace.html" class="text-gray-300 hover:text-green-400 transition-colors">Workspace</a>
+                    <a href="press.html" class="text-gray-300 hover:text-green-400 transition-colors">Press</a>
+                    <a href="games.html" class="text-gray-300 hover:text-green-400 transition-colors">Games</a>
+                    <a href="index.html#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section class="pt-24 pb-16 px-4 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+        <div class="container mx-auto text-center">
+            <div class="w-24 h-24 rounded-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center pulse-glow mx-auto mb-8">
+                <span class="text-green-400 text-4xl font-bold">⚡</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6">Services</h1>
+            <p class="text-xl md:text-2xl text-green-400 mb-8">AIとの共創で、あなたの想像を現実に</p>
+            <p class="text-lg text-gray-300 max-w-4xl mx-auto leading-relaxed">
+                ヴァイブコーディングの手法を活かし、従来では不可能だった創造的なソリューションを提供します。<br>
+                ゲーム開発からAI活用まで、新しい可能性を一緒に探求しましょう。
+            </p>
+        </div>
+    </section>
+
+    <!-- 提供サービス一覧 -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">提供サービス</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- ゲームプロトタイピング協力 -->
+                <div class="service-card rounded-lg p-8">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-6 float-animation">
+                        <img src="assets/images/services/game-prototyping-service.png" alt="ゲームプロトタイピングサービス" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-green-400 text-center">ゲームプロトタイピング協力</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        あなたのゲームアイデアを、AIとの対話を通じて具体的なプロトタイプに落とし込みます。
+                        従来の企画書では表現できない斬新なメカニクスやシステムを実装可能です。
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>• アイデア具現化の相談</li>
+                        <li>• プロトタイプ開発（Unity）</li>
+                        <li>• 革新的メカニクス設計</li>
+                        <li>• インタラクティブ要素の実装</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <span class="bg-green-500/20 text-green-400 px-3 py-1 rounded-full text-sm">期間: 2-8週間</span>
+                    </div>
+                </div>
+
+                <!-- AIを活用した開発コンサルティング -->
+                <div class="service-card rounded-lg p-8">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-6 float-animation" style="animation-delay: 0.5s">
+                        <img src="assets/images/services/ai-consulting-service.png" alt="AI開発コンサルティングサービス" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-400 text-center">AI開発コンサルティング</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        ヴァイブコーディングの手法を您のチームに導入し、AI活用による開発効率化と
+                        創造性向上をサポートします。開発プロセス全体の革新を実現。
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>• AI活用戦略の策定</li>
+                        <li>• 開発プロセス改善提案</li>
+                        <li>• チームトレーニング</li>
+                        <li>• 継続的な技術サポート</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <span class="bg-indigo-500/20 text-indigo-400 px-3 py-1 rounded-full text-sm">期間: 継続契約</span>
+                    </div>
+                </div>
+
+                <!-- 講演・執筆依頼 -->
+                <div class="service-card rounded-lg p-8">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mx-auto mb-6 float-animation" style="animation-delay: 1s">
+                        <img src="assets/images/services/speaking-writing-service.png" alt="講演・執筆サービス" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400 text-center">講演・執筆依頼</h3>
+                    <p class="text-gray-300 mb-6 leading-relaxed">
+                        「AIと創造性」をテーマに、カンファレンスでの講演や技術記事の執筆を行います。
+                        未来の開発手法について、実体験に基づいた洞察をお届けします。
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>• カンファレンス講演</li>
+                        <li>• 技術記事・寄稿</li>
+                        <li>• ワークショップ開催</li>
+                        <li>• メディア取材対応</li>
+                    </ul>
+                    <div class="mt-6 text-center">
+                        <span class="bg-purple-500/20 text-purple-400 px-3 py-1 rounded-full text-sm">期間: 単発〜継続</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 仕事の流れ -->
+    <section class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">仕事の流れ</h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid md:grid-cols-2 gap-12">
+                    
+                    <!-- ステップ1 -->
+                    <div class="process-step">
+                        <div class="process-line"></div>
+                        <div class="service-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-green-500 text-gray-900 flex items-center justify-center font-bold text-lg mr-4">1</div>
+                                <h3 class="text-xl font-bold text-green-400">初回相談</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                お問い合わせフォームまたはメールでのご連絡後、
+                                オンライン面談（30分）で要件とご予算を詳しくヒアリング。
+                            </p>
+                            <div class="text-sm text-gray-400">
+                                📅 所要時間: 30分<br>
+                                💰 費用: 無料
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ステップ2 -->
+                    <div class="process-step">
+                        <div class="process-line"></div>
+                        <div class="service-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-lg mr-4">2</div>
+                                <h3 class="text-xl font-bold text-indigo-400">提案書作成</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                ヒアリング内容を元に、具体的な作業範囲、スケジュール、
+                                料金を明記した提案書を3営業日以内にお送りします。
+                            </p>
+                            <div class="text-sm text-gray-400">
+                                📋 内容: 詳細見積もり・工程表<br>
+                                ⏰ 期間: 3営業日以内
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ステップ3 -->
+                    <div class="process-step">
+                        <div class="process-line"></div>
+                        <div class="service-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-purple-500 text-white flex items-center justify-center font-bold text-lg mr-4">3</div>
+                                <h3 class="text-xl font-bold text-purple-400">契約・着手</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                提案内容にご同意いただけましたら契約締結。
+                                着手金（総額の50%）のお支払い確認後、作業開始です。
+                            </p>
+                            <div class="text-sm text-gray-400">
+                                💼 契約: 電子契約<br>
+                                💰 着手金: 総額の50%
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ステップ4 -->
+                    <div class="process-step">
+                        <div class="service-card rounded-lg p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 rounded-full bg-pink-500 text-white flex items-center justify-center font-bold text-lg mr-4">4</div>
+                                <h3 class="text-xl font-bold text-pink-400">納品・完了</h3>
+                            </div>
+                            <p class="text-gray-300 mb-4">
+                                定期的な進捗報告を行いながら作業を進め、
+                                成果物の納品と動作確認後、残金のお支払いで完了です。
+                            </p>
+                            <div class="text-sm text-gray-400">
+                                📊 進捗: 週次レポート<br>
+                                ✅ 保証: 1ヶ月間サポート
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金体系 -->
+    <section class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">料金体系</h2>
+            <p class="text-center text-gray-400 mb-12">※ 価格は目安です。プロジェクトの規模・期間により調整いたします</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <!-- スモール -->
+                <div class="price-card rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-green-400 text-center">スモール</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-white">¥200K</span>
+                        <span class="text-gray-400">〜¥500K</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span class="text-gray-300">簡単なプロトタイプ作成</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span class="text-gray-300">AI活用アドバイス</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span class="text-gray-300">単発講演（1回）</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-2">✓</span>
+                            <span class="text-gray-300">期間: 2-4週間</span>
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="text-sm text-gray-400">個人・スタートアップ向け</span>
+                    </div>
+                </div>
+
+                <!-- ミディアム -->
+                <div class="price-card price-featured rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-indigo-400 text-center">ミディアム</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-white">¥500K</span>
+                        <span class="text-gray-400">〜¥1.5M</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-indigo-400 mr-2">✓</span>
+                            <span class="text-gray-300">本格的なゲーム開発</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-400 mr-2">✓</span>
+                            <span class="text-gray-300">チーム開発サポート</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-400 mr-2">✓</span>
+                            <span class="text-gray-300">継続コンサルティング</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-indigo-400 mr-2">✓</span>
+                            <span class="text-gray-300">期間: 1-3ヶ月</span>
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="text-sm text-gray-400">中小企業・制作会社向け</span>
+                    </div>
+                </div>
+
+                <!-- ラージ -->
+                <div class="price-card rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-4 text-purple-400 text-center">ラージ</h3>
+                    <div class="text-center mb-6">
+                        <span class="text-4xl font-bold text-white">¥1.5M</span>
+                        <span class="text-gray-400">〜</span>
+                    </div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <span class="text-purple-400 mr-2">✓</span>
+                            <span class="text-gray-300">大規模プロジェクト</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-400 mr-2">✓</span>
+                            <span class="text-gray-300">組織全体のDX支援</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-400 mr-2">✓</span>
+                            <span class="text-gray-300">専任サポート体制</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-400 mr-2">✓</span>
+                            <span class="text-gray-300">期間: 3ヶ月〜</span>
+                        </li>
+                    </ul>
+                    <div class="text-center">
+                        <span class="text-sm text-gray-400">大企業・パブリッシャー向け</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 追加情報 -->
+            <div class="mt-16 max-w-4xl mx-auto">
+                <div class="service-card rounded-lg p-8">
+                    <h3 class="text-2xl font-bold mb-6 text-green-400 text-center">料金に関する補足</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-lg font-bold mb-3 text-indigo-400">含まれるもの</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• 定期的な進捗レポート</li>
+                                <li>• 納品後1ヶ月間のサポート</li>
+                                <li>• ソースコード・ドキュメント</li>
+                                <li>• オンライン会議（無制限）</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold mb-3 text-purple-400">オプション</h4>
+                            <ul class="space-y-2 text-gray-300">
+                                <li>• 追加開発機能: ¥50K〜/機能</li>
+                                <li>• 長期サポート: ¥30K/月</li>
+                                <li>• 出張対応: 交通費 + ¥50K/日</li>
+                                <li>• 緊急対応: +50%料金</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA セクション -->
+    <section class="py-20 px-4 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl font-bold mb-8 text-green-400">あなたのアイデアを、現実に</h2>
+            <p class="text-xl text-gray-300 mb-12 leading-relaxed">
+                まずは無料相談から。どんな小さなアイデアでも、<br>
+                AIとの対話を通じて新しい可能性を見つけましょう。
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-6 justify-center">
+                <a href="index.html#contact" class="px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold text-lg">
+                    無料相談を申し込む
+                </a>
+                <a href="philosophy.html" class="px-8 py-4 border border-indigo-500 text-indigo-400 rounded-lg hover:bg-indigo-500 hover:text-white transition-colors font-semibold text-lg">
+                    開発手法を詳しく見る
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-8 px-4 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto text-center">
+            <div class="mb-4">
+                <a href="index.html" class="text-green-400 hover:text-green-300 transition-colors font-semibold">← ホームに戻る</a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 AKIRA - ヴァイブ・ゲームクリエイター. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

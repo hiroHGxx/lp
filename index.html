@@ -5,42 +5,631 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AKIRA - ヴァイブ・ゲームクリエイター</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* カスタムアニメーション */
+        @keyframes pulse-glow {
+            0%, 100% {
+                opacity: 1;
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.5);
+            }
+            50% {
+                opacity: 0.7;
+                box-shadow: 0 0 30px rgba(74, 222, 128, 0.8);
+            }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+        
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3);
+        }
+        
+        .work-card {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+        
+        .social-post {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+        
+        /* Echo Garden Game Styles */
+        #echoGardenCanvas {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        .game-success {
+            animation: pulse-glow 1s ease-in-out 3;
+        }
+    </style>
+    
+    <script>
+        // Echo Garden Game Logic
+        class EchoGarden {
+            constructor(canvasId) {
+                this.canvas = document.getElementById(canvasId);
+                this.ctx = this.canvas.getContext('2d');
+                this.plants = [];
+                this.connections = [];
+                this.isAnimating = false;
+                
+                // レスポンシブ対応
+                this.setupCanvas();
+                this.setupGame();
+                this.bindEvents();
+                
+                // ゲーム開始
+                this.startGame();
+            }
+            
+            setupCanvas() {
+                const rect = this.canvas.getBoundingClientRect();
+                this.canvas.width = 600;
+                this.canvas.height = 400;
+            }
+            
+            setupGame() {
+                // 植物の位置を設定（5x3のグリッド）
+                this.plants = [];
+                const rows = 3;
+                const cols = 5;
+                const offsetX = 80;
+                const offsetY = 80;
+                const spacingX = 90;
+                const spacingY = 80;
+                
+                for (let row = 0; row < rows; row++) {
+                    for (let col = 0; col < cols; col++) {
+                        this.plants.push({
+                            x: offsetX + col * spacingX,
+                            y: offsetY + row * spacingY,
+                            isLit: false,
+                            radius: 20,
+                            glowIntensity: 0,
+                            row: row,
+                            col: col
+                        });
+                    }
+                }
+                
+                // 接続パターンをランダムに生成
+                this.generateConnections();
+            }
+            
+            generateConnections() {
+                this.connections = [];
+                
+                // 各植物に対してランダムな接続を作成
+                for (let i = 0; i < this.plants.length; i++) {
+                    const plant = this.plants[i];
+                    const neighbors = this.getNeighbors(plant);
+                    
+                    // 隣接する植物の一部とランダムに接続
+                    neighbors.forEach(neighbor => {
+                        if (Math.random() < 0.4) { // 40%の確率で接続
+                            this.connections.push({
+                                from: i,
+                                to: this.plants.indexOf(neighbor)
+                            });
+                        }
+                    });
+                }
+            }
+            
+            getNeighbors(plant) {
+                const neighbors = [];
+                for (let other of this.plants) {
+                    if (other === plant) continue;
+                    
+                    // 隣接判定（グリッド上で隣り合っているか）
+                    const rowDiff = Math.abs(plant.row - other.row);
+                    const colDiff = Math.abs(plant.col - other.col);
+                    
+                    if ((rowDiff === 1 && colDiff === 0) || (rowDiff === 0 && colDiff === 1)) {
+                        neighbors.push(other);
+                    }
+                }
+                return neighbors;
+            }
+            
+            bindEvents() {
+                this.canvas.addEventListener('click', (e) => {
+                    if (this.isAnimating) return;
+                    
+                    const rect = this.canvas.getBoundingClientRect();
+                    const scaleX = this.canvas.width / rect.width;
+                    const scaleY = this.canvas.height / rect.height;
+                    
+                    const clickX = (e.clientX - rect.left) * scaleX;
+                    const clickY = (e.clientY - rect.top) * scaleY;
+                    
+                    // クリックされた植物を特定
+                    for (let i = 0; i < this.plants.length; i++) {
+                        const plant = this.plants[i];
+                        const distance = Math.sqrt((clickX - plant.x) ** 2 + (clickY - plant.y) ** 2);
+                        
+                        if (distance <= plant.radius) {
+                            this.activatePlant(i);
+                            break;
+                        }
+                    }
+                });
+                
+                // リセットボタン
+                document.getElementById('resetGame').addEventListener('click', () => {
+                    this.resetGame();
+                });
+                
+                // ヒントボタン
+                document.getElementById('hintButton').addEventListener('click', () => {
+                    this.showHint();
+                });
+            }
+            
+            activatePlant(plantIndex) {
+                this.isAnimating = true;
+                
+                // 選択された植物の状態を切り替え
+                this.plants[plantIndex].isLit = !this.plants[plantIndex].isLit;
+                
+                // 接続された植物も切り替え
+                this.connections.forEach(connection => {
+                    if (connection.from === plantIndex) {
+                        this.plants[connection.to].isLit = !this.plants[connection.to].isLit;
+                    }
+                    if (connection.to === plantIndex) {
+                        this.plants[connection.from].isLit = !this.plants[connection.from].isLit;
+                    }
+                });
+                
+                // アニメーション実行
+                this.animateActivation(() => {
+                    this.isAnimating = false;
+                    this.checkWinCondition();
+                });
+            }
+            
+            animateActivation(callback) {
+                let frame = 0;
+                const maxFrames = 30;
+                
+                const animate = () => {
+                    frame++;
+                    
+                    // グロー効果の計算
+                    this.plants.forEach(plant => {
+                        if (plant.isLit) {
+                            plant.glowIntensity = 0.5 + 0.5 * Math.sin(frame * 0.3);
+                        } else {
+                            plant.glowIntensity = Math.max(0, plant.glowIntensity - 0.05);
+                        }
+                    });
+                    
+                    this.draw();
+                    
+                    if (frame < maxFrames) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        callback();
+                    }
+                };
+                
+                animate();
+            }
+            
+            checkWinCondition() {
+                const allLit = this.plants.every(plant => plant.isLit);
+                
+                if (allLit) {
+                    this.showSuccess();
+                }
+            }
+            
+            showSuccess() {
+                // 勝利アニメーション
+                this.canvas.classList.add('game-success');
+                
+                setTimeout(() => {
+                    alert('🌟 おめでとうございます！すべての植物が光りました！\n\nEcho Bloomの世界では、このような植物同士の共鳴が\n物語の重要な要素になっています。');
+                    this.canvas.classList.remove('game-success');
+                }, 500);
+            }
+            
+            showHint() {
+                // 接続を一時的に表示
+                this.showConnections = true;
+                this.draw();
+                
+                setTimeout(() => {
+                    this.showConnections = false;
+                    this.draw();
+                }, 2000);
+            }
+            
+            resetGame() {
+                // 全ての植物を消灯
+                this.plants.forEach(plant => {
+                    plant.isLit = false;
+                    plant.glowIntensity = 0;
+                });
+                
+                // 新しい接続パターンを生成
+                this.generateConnections();
+                this.draw();
+            }
+            
+            startGame() {
+                this.draw();
+                // ゲーム開始時のアニメーション
+                this.animateStart();
+            }
+            
+            animateStart() {
+                let frame = 0;
+                const animate = () => {
+                    frame++;
+                    
+                    // 植物が順番に現れるアニメーション
+                    const plantIndex = Math.floor(frame / 5) % this.plants.length;
+                    if (frame % 5 === 0 && plantIndex < this.plants.length) {
+                        this.plants[plantIndex].glowIntensity = 0.3;
+                    }
+                    
+                    // フェードアウト
+                    this.plants.forEach(plant => {
+                        plant.glowIntensity = Math.max(0, plant.glowIntensity - 0.02);
+                    });
+                    
+                    this.draw();
+                    
+                    if (frame < 100) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                
+                animate();
+            }
+            
+            draw() {
+                // キャンバスをクリア
+                this.ctx.fillStyle = '#111827';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                // 背景パターン
+                this.drawBackground();
+                
+                // 接続線を描画（ヒント表示時）
+                if (this.showConnections) {
+                    this.drawConnections();
+                }
+                
+                // 植物を描画
+                this.drawPlants();
+            }
+            
+            drawBackground() {
+                // 微細な星のような点を描画
+                this.ctx.fillStyle = 'rgba(74, 222, 128, 0.1)';
+                for (let i = 0; i < 50; i++) {
+                    const x = Math.random() * this.canvas.width;
+                    const y = Math.random() * this.canvas.height;
+                    this.ctx.beginPath();
+                    this.ctx.arc(x, y, 1, 0, 2 * Math.PI);
+                    this.ctx.fill();
+                }
+            }
+            
+            drawConnections() {
+                this.ctx.strokeStyle = 'rgba(79, 70, 229, 0.6)';
+                this.ctx.lineWidth = 2;
+                this.ctx.setLineDash([5, 5]);
+                
+                this.connections.forEach(connection => {
+                    const from = this.plants[connection.from];
+                    const to = this.plants[connection.to];
+                    
+                    this.ctx.beginPath();
+                    this.ctx.moveTo(from.x, from.y);
+                    this.ctx.lineTo(to.x, to.y);
+                    this.ctx.stroke();
+                });
+                
+                this.ctx.setLineDash([]);
+            }
+            
+            drawPlants() {
+                this.plants.forEach(plant => {
+                    const baseColor = plant.isLit ? 'rgba(74, 222, 128, 1)' : 'rgba(74, 222, 128, 0.3)';
+                    
+                    // グロー効果
+                    if (plant.glowIntensity > 0) {
+                        this.ctx.shadowColor = '#4ade80';
+                        this.ctx.shadowBlur = 20;
+                    } else {
+                        this.ctx.shadowBlur = 0;
+                    }
+                    
+                    // 植物本体
+                    this.ctx.fillStyle = baseColor;
+                    this.ctx.beginPath();
+                    this.ctx.arc(plant.x, plant.y, plant.radius, 0, 2 * Math.PI);
+                    this.ctx.fill();
+                    
+                    // 内側の輝き
+                    if (plant.isLit) {
+                        this.ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
+                        this.ctx.beginPath();
+                        this.ctx.arc(plant.x, plant.y, plant.radius * 0.6, 0, 2 * Math.PI);
+                        this.ctx.fill();
+                    }
+                    
+                    // 境界線
+                    this.ctx.strokeStyle = plant.isLit ? '#22c55e' : '#4ade80';
+                    this.ctx.lineWidth = 2;
+                    this.ctx.beginPath();
+                    this.ctx.arc(plant.x, plant.y, plant.radius, 0, 2 * Math.PI);
+                    this.ctx.stroke();
+                    
+                    this.ctx.shadowBlur = 0;
+                });
+            }
+        }
+        
+        // ページ読み込み完了後にゲームを初期化
+        document.addEventListener('DOMContentLoaded', function() {
+            const game = new EchoGarden('echoGardenCanvas');
+        });
+    </script>
 </head>
-<body>
-    <!-- ナビゲーションバー -->
-    <nav class="absolute top-4 right-4">
-        <div class="flex space-x-6">
-            <a href="#" class="text-gray-300 hover:text-white transition-colors">Works</a>
-            <a href="#" class="text-gray-300 hover:text-white transition-colors">Skills</a>
-            <a href="#" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+<body class="bg-gray-900 text-white">
+    <!-- グローバルナビゲーション -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <img src="assets/images/logos/vibe-code-logo-main.png" alt="VIBE.CODE" class="h-8">
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#hero" class="text-gray-300 hover:text-green-400 transition-colors">Home</a>
+                    <a href="about.html" class="text-gray-300 hover:text-green-400 transition-colors">About</a>
+                    <a href="philosophy.html" class="text-gray-300 hover:text-green-400 transition-colors">Philosophy</a>
+                    <a href="services.html" class="text-gray-300 hover:text-green-400 transition-colors">Services</a>
+                    <a href="workspace.html" class="text-gray-300 hover:text-green-400 transition-colors">Workspace</a>
+                    <a href="press.html" class="text-gray-300 hover:text-green-400 transition-colors">Press</a>
+                    <a href="#works" class="text-gray-300 hover:text-green-400 transition-colors">Works</a>
+                    <a href="#echo-garden" class="text-gray-300 hover:text-green-400 transition-colors">Play</a>
+                    <a href="games.html" class="text-gray-300 hover:text-green-400 transition-colors">Games</a>
+                    <a href="#contact" class="text-gray-300 hover:text-green-400 transition-colors">Contact</a>
+                </div>
+            </div>
         </div>
     </nav>
 
     <!-- ヒーローセクション -->
-    <section class="h-screen bg-gray-900 flex items-center justify-center flex-col text-center">
+    <section id="hero" class="h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center flex-col text-center pt-16">
         <!-- クリエイターアイコン -->
-        <div class="w-24 h-24 rounded-full bg-gray-700 flex items-center justify-center">
-            <span class="text-green-400 text-4xl font-bold">A</span>
+        <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden pulse-glow mb-6">
+            <img src="assets/images/profiles/akira-main-profile.png" alt="AKIRA - ヴァイブ・ゲームクリエイター" class="w-full h-full object-cover" loading="eager">
         </div>
 
         <!-- 肩書き -->
-        <p class="mt-4 text-green-400">ヴァイブ・ゲームクリエイター</p>
+        <p class="text-green-400 text-xl mb-4">ヴァイブ・ゲームクリエイター</p>
 
         <!-- キャッチコピー -->
-        <h1 class="mt-2 text-5xl font-bold text-white">AIとの対話で、コードを紡ぎ、世界を創る。</h1>
+        <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 max-w-4xl leading-tight">
+            AIとの対話で、<br>コードを紡ぎ、世界を創る。
+        </h1>
 
         <!-- クリエイター名 -->
-        <p class="mt-6 text-gray-400">- AKIRA -</p>
+        <p class="text-gray-400 text-xl mb-8">- AKIRA -</p>
 
         <!-- CTAボタン -->
-        <div class="mt-8 flex space-x-4">
-            <button class="px-6 py-3 bg-green-500 text-white rounded hover:bg-green-600 transition-colors">
-                制作実績を見る
-            </button>
-            <button class="px-6 py-3 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors">
-                最新情報をチェック
-            </button>
+        <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
+            <a href="#works" class="px-8 py-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold">
+                創った世界を見る
+            </a>
+            <a href="#social" class="px-8 py-4 border border-indigo-500 text-indigo-400 rounded-lg hover:bg-indigo-500 hover:text-white transition-colors font-semibold">
+                開発ログを読む
+            </a>
         </div>
     </section>
+
+    <!-- 制作実績セクション -->
+    <section id="works" class="py-20 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">Works</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Echo Bloom -->
+                <div class="work-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/echo-bloom-screenshot.png" alt="Echo Bloom - 植物とAIが共鳴し合う不思議な世界" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Echo Bloom</h3>
+                    <p class="text-gray-400 mb-2">ジャンル: パズル・アドベンチャー</p>
+                    <p class="text-gray-300 mb-4">植物とAIが共鳴し合う不思議な世界で、プレイヤーは失われた記憶の断片を集めながら、生命の循環を体験するゲーム。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Neuron Drive -->
+                <div class="work-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/neuron-drive-screenshot.png" alt="Neuron Drive - 脳内ネットワークを駆け抜けるハイスピードレーシング" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Neuron Drive</h3>
+                    <p class="text-gray-400 mb-2">ジャンル: サイバーパンク・レーシング</p>
+                    <p class="text-gray-300 mb-4">脳内ネットワークを駆け抜けるハイスピードレーシング。思考の速度で走り、記憶の回路を切り開け。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+
+                <!-- Chrono Weavers -->
+                <div class="work-card rounded-lg p-6 hover-lift">
+                    <div class="w-full h-48 rounded-lg mb-4 overflow-hidden">
+                        <img src="assets/images/games/chrono-weavers-screenshot.png" alt="Chrono Weavers - 時間軸を織り交ぜながら物語を紡ぐRPG" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy">
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-green-400">Chrono Weavers</h3>
+                    <p class="text-gray-400 mb-2">ジャンル: タイムトラベル・RPG</p>
+                    <p class="text-gray-300 mb-4">時間軸を織り交ぜながら物語を紡ぐRPG。過去と未来を行き来し、運命の糸を編み直せ。</p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition-colors text-sm">Steam</a>
+                        <a href="#" class="px-4 py-2 border border-gray-500 text-gray-300 rounded hover:bg-gray-700 transition-colors text-sm">詳細</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- すべての作品を見るボタン -->
+            <div class="text-center mt-16">
+                <a href="games.html" class="inline-block px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 font-semibold text-lg shadow-lg hover:shadow-xl">
+                    すべての作品を見る
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Echo Garden ゲームセクション -->
+    <section id="echo-garden" class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto max-w-4xl text-center">
+            <h2 class="text-4xl font-bold mb-6 text-green-400">Echo Garden</h2>
+            <p class="text-xl text-gray-300 mb-4">植物と対話する、ヴァイブコーディングの世界を体験</p>
+            <p class="text-gray-400 mb-12">植物をクリックして光のパターンを見つけよう。全ての植物が光れば成功です！</p>
+            
+            <!-- ゲームキャンバス -->
+            <div class="bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg p-8 mb-8">
+                <canvas id="echoGardenCanvas" width="600" height="400" class="mx-auto border border-green-400/30 rounded-lg bg-gray-900"></canvas>
+            </div>
+            
+            <!-- ゲームコントロール -->
+            <div class="flex justify-center space-x-4">
+                <button id="resetGame" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold">
+                    新しいパターン
+                </button>
+                <button id="hintButton" class="px-6 py-3 border border-indigo-500 text-indigo-400 rounded-lg hover:bg-indigo-500 hover:text-white transition-colors font-semibold">
+                    ヒント
+                </button>
+            </div>
+            
+            <!-- ゲーム説明 -->
+            <div class="mt-8 text-left max-w-2xl mx-auto">
+                <div class="bg-gray-700/50 rounded-lg p-6">
+                    <h3 class="text-lg font-bold mb-3 text-green-400">あそびかた</h3>
+                    <ul class="space-y-2 text-gray-300 text-sm">
+                        <li>• 植物（緑の円）をクリックすると光ります</li>
+                        <li>• 隣り合う植物にも光が伝わることがあります</li>
+                        <li>• すべての植物を同時に光らせることが目標です</li>
+                        <li>• Echo Bloomの世界観を表現した小さな体験です</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ソーシャルセクション -->
+    <section id="social" class="py-20 px-4 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">Social</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                
+                <!-- Twitter/X タイムライン -->
+                <div class="social-post rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-gray-900 font-bold">A</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-green-400">@AKIRA_vibes</h3>
+                            <p class="text-gray-400 text-sm">2時間前</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-4">Echo Bloomのアップデート作業中。AIとのペアプログラミングで新しいパズルギミックが生まれそう。創造性の化学反応が止まらない 🌱✨</p>
+                    <div class="flex space-x-6 text-gray-400">
+                        <span class="hover:text-green-400 cursor-pointer">♡ 42</span>
+                        <span class="hover:text-green-400 cursor-pointer">↻ 12</span>
+                        <span class="hover:text-green-400 cursor-pointer">💬 8</span>
+                    </div>
+                </div>
+
+                <!-- Instagram風投稿 -->
+                <div class="social-post rounded-lg p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center mr-3">
+                            <span class="text-white font-bold">A</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-indigo-400">akira.gamedev</h3>
+                            <p class="text-gray-400 text-sm">1日前</p>
+                        </div>
+                    </div>
+                    <div class="w-full h-48 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-lg mb-4 flex items-center justify-center">
+                        <span class="text-white text-lg">開発中スクリーンショット</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">#ChronoWeavers の新しい時間軸エフェクト完成！過去と未来が交差する瞬間を表現できた。#GameDev #IndieGame #AI開発</p>
+                    <div class="flex space-x-6 text-gray-400">
+                        <span class="hover:text-indigo-400 cursor-pointer">♡ 156</span>
+                        <span class="hover:text-indigo-400 cursor-pointer">💬 23</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせセクション -->
+    <section id="contact" class="py-20 px-4">
+        <div class="container mx-auto max-w-2xl">
+            <h2 class="text-4xl font-bold text-center mb-16 text-green-400">Contact</h2>
+            <form class="space-y-6">
+                <div>
+                    <label for="name" class="block text-gray-300 mb-2">お名前</label>
+                    <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-400 focus:outline-none transition-colors">
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-gray-300 mb-2">Email</label>
+                    <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-400 focus:outline-none transition-colors">
+                </div>
+                
+                <div>
+                    <label for="subject" class="block text-gray-300 mb-2">用件</label>
+                    <select id="subject" name="subject" class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-400 focus:outline-none transition-colors">
+                        <option value="">選択してください</option>
+                        <option value="work">お仕事のご依頼</option>
+                        <option value="collaboration">コラボレーション</option>
+                        <option value="interview">取材・インタビュー</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="message" class="block text-gray-300 mb-2">メッセージ</label>
+                    <textarea id="message" name="message" rows="6" class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white focus:border-green-400 focus:outline-none transition-colors" placeholder="お気軽にメッセージをお送りください"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full py-4 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-semibold text-lg">
+                    送信する
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="py-8 px-4 bg-gray-800 border-t border-gray-700">
+        <div class="container mx-auto text-center text-gray-400">
+            <p>&copy; 2024 AKIRA - ヴァイブ・ゲームクリエイター. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
